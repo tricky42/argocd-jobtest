@@ -1,0 +1,5 @@
+server:
+  ingress:
+    enabled: false
+#    hosts: 
+#      - argocd.local.oryapis.localhost
