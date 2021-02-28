@@ -3,8 +3,7 @@ kind: Job
 metadata:
   generateName: loop-
   annotations:
-    compare-options: IgnoreExtraneous
-    sync-options: Prune=false
+    argocd.argoproj.io/hook: Sync
 spec:
   template:
     spec:
