@@ -3,7 +3,7 @@ kind: Job
 metadata:
   name: loop
   labels:
-    will: 'not work'
+    will: 'not-work'
 spec:
   template:
     spec:
