@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+  namespace: workload
+  labels:
+    app: kuard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuard
+  template:
+    metadata:
+      labels:
+        app: kuard
+    spec:
+      containers:
+        - image: gcr.io/kuar-demo/kuard-amd64:1
+          name: kuard
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            -
+              name: TEST
+              value: SUCCESS
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kuard
+  namespace: workload
+spec:
+  selector:
+    app: kuard
+  ports:
+  - port: 8080
+    targetPort: 8080
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: workload
+  name: kuard
+spec:
+  rules:
+  - host: 'kuard.local.oryapis.localhost'
+    http:
+      paths:
+      - pathType: Prefix
+        path: '/'
+        backend:
+          service:
+            name: kuard
+            port: 
+              number: 8080
