@@ -2,6 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   generateName: loop-
+  annotations:
+    compare-options: IgnoreExtraneous
+    sync-options: Prune=false
 spec:
   template:
     spec:
